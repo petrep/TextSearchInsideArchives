@@ -19,12 +19,12 @@ import javafx.scene.control.TextArea;
 
 public class MainController {
 	@FXML
-	TextArea TextArea;
+	TextArea searchResultTextArea;
 	String searchResultText;
 
 	public void Search() throws IOException {
 		System.out.println("MainController starting");
-		TextArea.setText("executing MainController");
+		searchResultTextArea.setText("executing MainController");
 		searchResultText = "";
 
 		// String searchedExpression = "BinaryDecoder";
@@ -101,7 +101,7 @@ public class MainController {
 	public void searchTextWithinFile(File file, String searchedExpression) throws IOException {
 		Scanner scanner = new Scanner(file);
 		
-		TextArea.setWrapText(true);
+		searchResultTextArea.setWrapText(true);
 //		System.out.println("FILENAME: " + file.getName());
 		while (scanner.hasNextLine()) {
 			final String lineFromFile = scanner.nextLine();
@@ -109,7 +109,7 @@ public class MainController {
 				// a match!
 				System.out.println("I found " + searchedExpression + " in file " + file.getName());
 				searchResultText += "I found " + searchedExpression + " in file " + file.getCanonicalPath() + System.getProperty("line.separator");
-				TextArea.setText(searchResultText);
+				searchResultTextArea.setText(searchResultText);
 //				TextArea.setText(System.getProperty("line.separator"));
 				break;
 			}
