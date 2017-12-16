@@ -15,23 +15,47 @@ import java.util.jar.JarInputStream;
 import java.util.zip.ZipEntry;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 public class MainController {
 	@FXML
+	TextField searchedExpressionTextField;
+	@FXML
 	TextArea searchResultTextArea;
+	@FXML
+	Label selectedDirectoryLabel;
 	String searchResultText;
+	
+	public void SelectSearchDirectory(){
+		Stage stageTheLabelBelongs = (Stage) selectedDirectoryLabel.getScene().getWindow();
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = 
+                directoryChooser.showDialog(stageTheLabelBelongs);
+         
+        if(selectedDirectory == null){
+        	selectedDirectoryLabel.setText("No Directory selected");
+        }else{
+        	selectedDirectoryLabel.setText(selectedDirectory.getAbsolutePath());
+        }
+		
+	}
 
 	public void Search() throws IOException {
 		System.out.println("MainController starting");
 		searchResultTextArea.setText("executing MainController");
 		searchResultText = "";
 
-		// String searchedExpression = "BinaryDecoder";
-		String searchedExpression = "there-was-an-error-when-trying-to-validate-your-form";
+		String searchedExpression = searchedExpressionTextField.getText();
+//		String searchedExpression = "BinaryDecoder";
+//		String searchedExpression = "there-was-an-error-when-trying-to-validate-your-form";
 
 		// String searchPath = "c:\\liferay\\canbedeleted\\";
-		String searchPath = "/home/peter/tools/TextSearchInsideArchives";
+//		String searchPath = "/home/peter/tools/TextSearchInsideArchives";
+		String searchPath = selectedDirectoryLabel.getText();
 		
 		String default_tmp = System.getProperty("java.io.tmpdir");
         System.out.println("tmp "+default_tmp);
@@ -92,7 +116,7 @@ public class MainController {
 				}
 				
 //				canBeAddedToTheGoToResultList = true;
-//				searchTextWithinFile(file, searchedExpression);
+				searchTextWithinFile(file, searchedExpression);
 			}
 		}
 
