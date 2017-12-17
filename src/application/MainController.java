@@ -29,6 +29,7 @@ public class MainController {
 	@FXML
 	Label selectedDirectoryLabel;
 	String searchResultText;
+	String realFilePath;
 	
 	public void SelectSearchDirectory(){
 		Stage stageTheLabelBelongs = (Stage) selectedDirectoryLabel.getScene().getWindow();
@@ -41,6 +42,9 @@ public class MainController {
         }else{
         	selectedDirectoryLabel.setText(selectedDirectory.getAbsolutePath());
         }
+        
+        selectedDirectoryLabel.setText("c:\\liferay\\canbedeleted\\");
+        searchedExpressionTextField.setText("BinaryDecoder");
 		
 	}
 
@@ -116,13 +120,13 @@ public class MainController {
 				}
 				
 //				canBeAddedToTheGoToResultList = true;
-				searchTextWithinFile(file, searchedExpression);
+				searchTextWithinFile(file, searchedExpression, realFilePath);
 			}
 		}
 
 	}
 
-	public void searchTextWithinFile(File file, String searchedExpression) throws IOException {
+	public void searchTextWithinFile(File file, String searchedExpression, String realFilePath) throws IOException {
 		Scanner scanner = new Scanner(file);
 		
 		searchResultTextArea.setWrapText(true);
@@ -213,7 +217,7 @@ public class MainController {
 						System.out.println("JAAAR" + entry.getName());
 						extractFiles(targetFile, destPath, searchedExpression);
 					} else {
-						searchTextWithinFile(targetFile, searchedExpression);
+						searchTextWithinFile(targetFile, searchedExpression, realFilePath);
 					}
 
 //	                targetFile.deleteOnExit();

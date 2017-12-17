@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 // TODO2: create a preferences file that holds the last searched folder and expression?
 // TODO3: delete tmp on exit?
 // TODO4: save 'tmp delete' as preference?
+// TODO5: add support for zip, 7z, rar, arj etc.  Note looks like direct search inside zip works natively.
+// TODO6: change the logic to run as a separate thread, maybe with progress bar or hourglass during search
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
