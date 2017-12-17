@@ -77,7 +77,7 @@ public class MainController {
 		
 		
         // At program end, we delete our temporary folder
-//        recursiveDelete(new File(folder));
+        recursiveDelete(new File(folder));
 
 	}
 
