@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 
 // TODO: the tool currently shows results from the tmp folder
 // instead of showing the real folder location of the jar file
+// TODO2: create a preferences file that holds the last searched folder and expression?
+// TODO3: delete tmp on exit?
+// TODO4: save 'tmp delete' as preference?
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
