@@ -7,7 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 //import javafx.scene.layout.BorderPane;
 
-
+// TODO: the tool currently shows results from the tmp folder
+// instead of showing the real folder location of the jar file
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
