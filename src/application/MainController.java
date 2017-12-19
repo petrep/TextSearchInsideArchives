@@ -29,7 +29,11 @@ public class MainController {
 	@FXML
 	Label selectedDirectoryLabel;
 	String searchResultText;
+	String searchPath;
 	String realFilePath;
+	String realArchivePath;
+	String displayedFullPath;
+	boolean canBeAddedToTheGoToResultList;
 	
 	public void SelectSearchDirectory(){
 		Stage stageTheLabelBelongs = (Stage) selectedDirectoryLabel.getScene().getWindow();
@@ -43,7 +47,8 @@ public class MainController {
         	selectedDirectoryLabel.setText(selectedDirectory.getAbsolutePath());
         }
         
-        selectedDirectoryLabel.setText("c:\\liferay\\canbedeleted\\");
+//        selectedDirectoryLabel.setText("c:\\liferay\\canbedeleted\\");
+        selectedDirectoryLabel.setText("/home/peter/tools/TextSearchInsideArchives");
         searchedExpressionTextField.setText("BinaryDecoder");
 		
 	}
@@ -52,14 +57,15 @@ public class MainController {
 		System.out.println("MainController starting");
 		searchResultTextArea.setText("executing MainController");
 		searchResultText = "";
+		canBeAddedToTheGoToResultList = true;
 
 		String searchedExpression = searchedExpressionTextField.getText();
 //		String searchedExpression = "BinaryDecoder";
 //		String searchedExpression = "there-was-an-error-when-trying-to-validate-your-form";
 
-		// String searchPath = "c:\\liferay\\canbedeleted\\";
-//		String searchPath = "/home/peter/tools/TextSearchInsideArchives";
-		String searchPath = selectedDirectoryLabel.getText();
+		// searchPath = "c:\\liferay\\canbedeleted\\";
+//		searchPath = "/home/peter/tools/TextSearchInsideArchives";
+		searchPath = selectedDirectoryLabel.getText();
 		
 		String default_tmp = System.getProperty("java.io.tmpdir");
         System.out.println("tmp "+default_tmp);
@@ -69,8 +75,14 @@ public class MainController {
         // At program start, we delete our temporary folder
         recursiveDelete(new File(folder));
 
-		File[] files = new File(searchPath).listFiles();
-		searchFiles(files, searchedExpression);
+        File mySearchPath = new File(searchPath);
+        if (mySearchPath.exists()){
+        	File[] files = new File(searchPath).listFiles();
+        	displayedFullPath = searchPath;
+        	System.out.println("displayedFullPath1: " + displayedFullPath);
+        	searchFiles(files, searchedExpression);
+        } else System.out.println("the search location is invalid");
+
 
 		
 
@@ -85,9 +97,12 @@ public class MainController {
 		for (File file : files) {
 			String fileName = file.getName();
 			String extension = "";
-			boolean canBeAddedToTheGoToResultList;
+			System.out.println("displayedFullPath2: " + displayedFullPath);
+			
 			if (file.isDirectory()) {
-				System.out.println("Directory: " + fileName);
+//				System.out.println("Directory: " + fileName);
+				displayedFullPath = displayedFullPath + System.getProperty("file.separator") + fileName;
+				System.out.println("looking in this directory: " + displayedFullPath);
 				searchFiles(file.listFiles(), searchedExpression); // Calls same
 																	// method
 																	// again.
@@ -97,6 +112,7 @@ public class MainController {
 				extension = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
 
 				if (extension.equals("jar")) {
+					if(canBeAddedToTheGoToResultList) realArchivePath = file.getAbsolutePath();
 					System.out.println("starting to handle a jar: " + file.getCanonicalPath());
 					canBeAddedToTheGoToResultList = false;
 					
