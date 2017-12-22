@@ -48,7 +48,7 @@ public class MainController {
         }
         
 //        selectedDirectoryLabel.setText("c:\\liferay\\canbedeleted\\");
-        selectedDirectoryLabel.setText("/home/peter/tools/TextSearchInsideArchives");
+        selectedDirectoryLabel.setText("/home/peterpetrekanics/git/TextSearchInsideArchives/");
         searchedExpressionTextField.setText("BinaryDecoder");
 		
 	}
@@ -83,13 +83,10 @@ public class MainController {
         	searchFiles(files, searchedExpression);
         } else System.out.println("the search location is invalid");
 
-
-		
-
-		
 		
         // At program end, we delete our temporary folder
         recursiveDelete(new File(folder));
+        System.out.println("Program finished running");
 
 	}
 
@@ -139,7 +136,6 @@ public class MainController {
 				searchTextWithinFile(file, searchedExpression, realFilePath);
 			}
 		}
-
 	}
 
 	public void searchTextWithinFile(File file, String searchedExpression, String realFilePath) throws IOException {
