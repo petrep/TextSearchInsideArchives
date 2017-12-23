@@ -226,7 +226,7 @@ public class MainController {
 //					searchResultTextArea.appendText("I found " + searchedExpression + " in file " + currentFileName);
 //					searchResultTextArea.appendText(System.getProperty("line.separator"));
 //					System.out.println("I found " + searchedExpression + " in file " + currentFileName);
-					searchResultTextArea.appendText("I found '" + searchedExpression + "', and the full file name is:");
+					searchResultTextArea.appendText("I found '" + searchedExpression  + "' in file " + currentFileName + ", and the full file name is:");
 					searchResultTextArea.appendText(System.getProperty("line.separator"));
 					System.out.println("I found " + searchedExpression + ", and the full file name is:");
 					if(insideAnArchiveSearch){
