@@ -7,12 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 //import javafx.scene.layout.BorderPane;
 
-// TODO: the tool currently shows results from the tmp folder
-// instead of showing the real folder location of the jar file
 // TODO2: create a preferences file that holds the last searched folder and expression?
-// TODO3: delete tmp on exit?
 // TODO4: save 'tmp delete' as preference?
-// TODO5: add support for zip, 7z, rar, arj etc.  Note looks like direct search inside zip works natively.
+// TODO5: add support for zip, 7z, rar, arj etc.  Note: looks like direct search inside zip works natively.
+// I have tested apache commons compress 1.15 but it needs a lot of code
 // TODO6: change the logic to run as a separate thread, maybe with progress bar or hourglass during search
 public class Main extends Application {
 	@Override
